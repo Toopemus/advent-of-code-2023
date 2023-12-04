@@ -14,20 +14,20 @@ fn get_possible_id(game: &str) -> Option<i32> {
         ("green", 13),
         ("blue", 14),
     ]);
-    let vec: Vec<&str> = game.split(':').collect();
-    let game_id = vec[0];
-    let game = vec[1];
+    let game_data: Vec<&str> = game.split(':').collect();
+    let game_id = game_data[0];
+    let game = game_data[1];
     let handfuls = game.split(|c| c == ',' || c == ';');
     for handful in handfuls {
-        let vec: Vec<&str> = handful.trim().split(' ').collect();
-        let amount: i32 = vec[0].parse().unwrap();
-        let color = vec[1];
+        let hand_data: Vec<&str> = handful.trim().split(' ').collect();
+        let amount: i32 = hand_data[0].parse().unwrap();
+        let color = hand_data[1];
         for (key, val) in &bag_contains {
             if key == &color && val < &amount { return None }
         }
     }
-    let vec: Vec<&str> = game_id.split(' ').collect();
-    let id: i32 = vec[1].parse().unwrap();
+    let split_game: Vec<&str> = game_id.split(' ').collect();
+    let id: i32 = split_game[1].parse().unwrap();
 
     Some(id)
 }
